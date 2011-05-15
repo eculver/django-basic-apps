@@ -5,6 +5,11 @@ from tagging.fields import TagField
 
 import tagging
 
+BASIC_AUDIOS_UPLOAD_PATH = getattr(settings, 'BASIC_AUDIOS_UPLOAD_PATH', 'audios')
+BASIC_AUDIO_STILLS_UPLOAD_PATH = getattr(settings, 'BASIC_AUDIO_STILLS_UPLOAD_PATH', 'audio_stills')
+BASIC_PHOTOS_UPLOAD_PATH = getattr(settings, 'BASIC_PHOTOS_UPLOAD_PATH', 'photos')
+BASIC_VIDEOS_UPLOAD_PATH = getattr(settings, 'BASIC_VIDEOS_UPLOAD_PATH', 'videos')
+BASIC_VIDEO_STILLS_UPLOAD_PATH = getattr(settings, 'BASIC_VIDEO_STILLS_UPLOAD_PATH', 'video_stills')
 
 class AudioSet(models.Model):
     """AudioSet model"""
@@ -30,8 +35,8 @@ class Audio(models.Model):
     """Audio model"""
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    still = models.FileField(upload_to='audio_stills', blank=True, help_text='An image that will be used as a thumbnail.')
-    audio = models.FileField(upload_to='audio', blank=False, null=False)
+    still = models.FileField(upload_to=BASIC_AUDIO_STILLS_UPLOAD_PATH, blank=True, help_text='An image that will be used as a thumbnail.')
+    audio = models.FileField(upload_to=BASIC_AUDIOS_UPLOAD_PATH, blank=False, null=False)
     description = models.TextField(blank=True)
     tags = TagField()
     uploaded = models.DateTimeField(auto_now_add=True)
@@ -82,7 +87,7 @@ class Photo(models.Model):
     )
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    photo = models.FileField(upload_to="photos")
+    photo = models.FileField(upload_to=BASIC_PHOTOS_UPLOAD_PATH)
     taken_by = models.CharField(max_length=100, blank=True)
     license = models.URLField(blank=True, choices=LICENSES)
     description = models.TextField(blank=True)
@@ -141,8 +146,8 @@ class Video(models.Model):
     """Video model"""
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    still = models.FileField(upload_to='video_stills', blank=True, help_text='An image that will be used as a thumbnail.')
-    video = models.FilePathField(path=settings.MEDIA_ROOT+'videos/', recursive=True)
+    still = models.FileField(upload_to=BASIC_VIDEO_STILLS_UPLOAD_PATH, blank=True, help_text='An image that will be used as a thumbnail.')
+    video = models.FileField(upload_to=BASIC_VIDEOS_UPLOAD_PATH, blank=True, null=True)
     description = models.TextField(blank=True)
     tags = TagField()
     uploaded = models.DateTimeField(auto_now_add=True)
