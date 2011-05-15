@@ -148,6 +148,7 @@ class Video(models.Model):
     slug = models.SlugField()
     still = models.FileField(upload_to=BASIC_VIDEO_STILLS_UPLOAD_PATH, blank=True, help_text='An image that will be used as a thumbnail.')
     video = models.FileField(upload_to=BASIC_VIDEOS_UPLOAD_PATH, blank=True, null=True)
+    video_url = models.TextField(null=True, blank=True)
     description = models.TextField(blank=True)
     tags = TagField()
     uploaded = models.DateTimeField(auto_now_add=True)
@@ -162,3 +163,10 @@ class Video(models.Model):
     @permalink
     def get_absolute_url(self):
         return ('video_detail', None, { 'slug': self.slug })
+
+    def save(self, *args, **kwargs):
+        "Make sure that either a video was uploaded or a video_url was provided"
+        if not self.video and not self.video_url:
+            raise ValidationError("You must either upload a video or provide a video_url")
+
+        super(Video, self).save(*args, **kwargs)
