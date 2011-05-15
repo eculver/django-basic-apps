@@ -31,7 +31,7 @@ class Audio(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField()
     still = models.FileField(upload_to='audio_stills', blank=True, help_text='An image that will be used as a thumbnail.')
-    audio = models.FilePathField(path=settings.MEDIA_ROOT+'audios/', recursive=True)
+    audio = models.FileField(upload_to='audio', blank=False, null=False)
     description = models.TextField(blank=True)
     tags = TagField()
     uploaded = models.DateTimeField(auto_now_add=True)
