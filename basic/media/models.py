@@ -39,6 +39,7 @@ class Audio(models.Model):
     audio = models.FileField(upload_to=BASIC_AUDIOS_UPLOAD_PATH, blank=False, null=False)
     description = models.TextField(blank=True)
     tags = TagField()
+    location = models.CharField(max_length=200, blank=True, help_text='Location from which geolocation (latitude, longitude) will be derived.')
     uploaded = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -92,6 +93,7 @@ class Photo(models.Model):
     license = models.URLField(blank=True, choices=LICENSES)
     description = models.TextField(blank=True)
     tags = TagField()
+    location = models.CharField(max_length=200, blank=True, help_text='Location from which geolocation (latitude, longitude) will be derived.')
     uploaded = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     _exif = models.TextField(blank=True) 
@@ -151,6 +153,7 @@ class Video(models.Model):
     video_url = models.TextField(null=True, blank=True)
     description = models.TextField(blank=True)
     tags = TagField()
+    location = models.CharField(max_length=200, blank=True, help_text='Location from which geolocation (latitude, longitude) will be derived.')
     uploaded = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
