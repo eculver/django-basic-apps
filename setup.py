@@ -31,7 +31,7 @@ for dirpath, dirnames, filenames in os.walk(package_dir):
 
 
 setup(name='django-basic-apps',
-    version='0.7.1',
+    version='0.7.2',
     description='Django Basic Apps',
     author='Nathan Borror',
     url='http://github.com/nathanborror/django-basic-apps',
