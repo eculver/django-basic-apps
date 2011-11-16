@@ -55,6 +55,7 @@ class Audio(models.Model):
       return ('audio_detail', None, { 'slug': self.slug })
 
 
+
 class PhotoSet(models.Model):
     """PhotoSet model"""
     title = models.CharField(max_length=255)
